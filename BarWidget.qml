@@ -3,6 +3,7 @@ import Quickshell
 import qs.Commons
 import qs.Ui
 import "BarGeometry.js" as BarGeometry
+import "PlayerIdentity.js" as PlayerIdentity
 
 BarWidget {
   id: root
@@ -15,6 +16,9 @@ BarWidget {
   readonly property string artist: mediaService ? mediaService.artist : ""
   readonly property string album: mediaService ? mediaService.album : ""
   readonly property string artUrl: mediaService ? mediaService.artUrl : ""
+  readonly property bool isBrowser: mediaService && typeof mediaService.isBrowser === "boolean"
+    ? mediaService.isBrowser
+    : PlayerIdentity.isBrowser(activePlayer)
   readonly property bool showArtist: setting("showArtist", true) === true
   readonly property bool showControls: setting("showControls", true) === true
   readonly property bool showAlbumArt: setting("showAlbumArt", true) === true
@@ -23,10 +27,7 @@ BarWidget {
   readonly property int maxLabelWidth: Math.max(80, Number(setting("maxLabelWidth", 300)))
   readonly property int configuredArtSize: Math.max(12, Number(setting("albumArtSize", 18)))
   readonly property int artSize: Math.min(configuredArtSize, Math.max(12, barSize - Style.space(6)))
-  readonly property string fullDisplayText: {
-    if (showArtist && artist && title) return artist + " — " + title
-    return title || artist
-  }
+  readonly property string fullDisplayText: PlayerIdentity.formatDisplayText(title, artist, isBrowser, showArtist)
   readonly property string displayText: limitCharacters(fullDisplayText, maxCharacters)
   readonly property string tooltipText: {
     var text = fullDisplayText
@@ -420,7 +421,7 @@ BarWidget {
       Toggle {
         width: parent.width
         label: "Show artist"
-        description: "Place the artist before the track title."
+        description: "Place the artist before the track title for non-browser players."
         checked: root.showArtist
         foreground: root.bar ? root.bar.foreground : Color.foreground
         accent: Color.accent

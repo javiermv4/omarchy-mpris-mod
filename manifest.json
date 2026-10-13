@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "crmne.mpris",
+  "id": "crmne.mpris.mod",
   "name": "Media Controls + Album Art",
   "version": "1.1.1",
   "author": "Carmine Paolino",
@@ -86,7 +86,7 @@
         "key": "showArtist",
         "type": "boolean",
         "label": "Show artist",
-        "description": "Show artist before the track title when metadata provides it.",
+        "description": "Show artist before the track title for non-browser players when metadata provides it.",
         "defaultValue": true
       }
     ]

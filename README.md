@@ -19,17 +19,19 @@ host. If even the compact control cannot fit, the widget temporarily hides
 until space is available again.
 
 It works with Spotify and other Linux media players that expose the standard
-MPRIS interface. The widget uses Quickshell's MPRIS service directly: it does
-not poll `playerctl`, download cover art into `/tmp`, or depend on the old
-Waybar scripts. It also works on custom or cloned bars, which do not receive
-the shell's plugin services: there the widget runs its own copy of the
-service.
+MPRIS interface. For standalone players, the widget displays the artist and
+title when available. When playing media in Firefox or other web browsers, it
+displays the title alone so web metadata stays concise on the bar. The widget
+uses Quickshell's MPRIS service directly: it does not poll `playerctl`,
+download cover art into `/tmp`, or depend on the old Waybar scripts. It also
+works on custom or cloned bars, which do not receive the shell's plugin
+services: there the widget runs its own copy of the service.
 
 ## Install
 
 ```bash
-omarchy plugin add https://github.com/crmne/omarchy-mpris.git --enable --yes
-omarchy bar move crmne.mpris --section right --before omarchy.tray
+omarchy plugin add https://github.com/javiermv4/omarchy-mpris-mod.git --enable --yes
+omarchy bar move crmne.mpris.mod --section right --before omarchy.tray
 ```
 
 ## Requirements
@@ -59,12 +61,13 @@ the previous track. Scrolling anywhere over the controls changes track.
 Right-click any part of the widget to open its appearance panel.
 
 The appearance panel and Omarchy bar settings expose adaptive layout,
-transport controls, album artwork, artist visibility, album-art size, label
-width, and a maximum artist/title character count.
+transport controls, album artwork, artist visibility (for non-browser players),
+album-art size, label width, and a maximum artist/title character count.
 
 ## Validation
 
-Run the geometry and service-lookup regression tests with Qt Quick Test:
+Run the geometry, player-classification, and service-lookup regression tests
+with Qt Quick Test:
 
 ```bash
 QT_QPA_PLATFORM=offscreen /usr/lib/qt6/bin/qmltestrunner -input tests

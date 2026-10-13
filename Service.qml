@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Io
 import Quickshell.Services.Mpris
+import "PlayerIdentity.js" as PlayerIdentity
 
 Item {
   id: root
@@ -19,6 +20,7 @@ Item {
   readonly property string artist: activePlayer ? String(activePlayer.trackArtist || "") : ""
   readonly property string album: activePlayer ? String(activePlayer.trackAlbum || "") : ""
   readonly property string artUrl: activePlayer ? String(activePlayer.trackArtUrl || "") : ""
+  readonly property bool isBrowser: PlayerIdentity.isBrowser(activePlayer)
 
   function playerKey(player) {
     if (!player) return ""
@@ -129,7 +131,8 @@ Item {
       album: album,
       artUrl: artUrl,
       canGoPrevious: !!(player && player.canGoPrevious),
-      canGoNext: !!(player && player.canGoNext)
+      canGoNext: !!(player && player.canGoNext),
+      isBrowser: root.isBrowser
     }
   }
 
