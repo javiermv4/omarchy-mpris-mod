@@ -2,7 +2,7 @@
 
 Credits to the original author: Carmine Paolino, 
 original project: https://github.com/crmne/omarchy-mpris.
-I've added a simple modification that displays author just when playing
+I've added a simple modification that displays author's name only when playing
 music from anything that is not a browser. This is done in order to
 avoid showing uploader's names instead of artist's names when listening to
 music from YouTube.
