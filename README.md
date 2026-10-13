@@ -1,5 +1,12 @@
 # Media Controls + Album Art for Omarchy
 
+Credits to the original author: Carmine Paolino, 
+original project: https://github.com/crmne/omarchy-mpris.
+I've added a simple modification that displays author just when playing
+music from anything that is not a browser. This is done in order to
+avoid showing uploader's names instead of artist's names when listening to
+music from YouTube.
+
 A native Quattro/Quickshell now-playing widget for the Omarchy bar, with media
 controls, live album art, and artist/title details:
 
